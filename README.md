@@ -2,10 +2,8 @@
 
 An open-source R implementation that estimates a person's **functional age**
 from physical performance measures. FitAge **adapts the Klemera-Doubal Method
-(KDM) framework to functional fitness markers** — the same machinery used for
-blood-biomarker biological-age clocks (e.g.
-[`BioAge`](https://github.com/dayoonkwon/BioAge)), but applied to physical
-performance. It is an **exploratory, educational** tool: fitness markers are
+(KDM) framework to functional fitness markers.
+It is an **exploratory, educational** tool: fitness markers are
 individually weaker age predictors than blood biomarkers, and FitAge has **not**
 been validated against health outcomes — it is **not** equivalent to a validated
 biological-age clock.
@@ -13,6 +11,8 @@ biological-age clock.
 Markers: grip strength, sit-to-stand / sit-and-rise, one-leg balance,
 sit-and-reach flexibility, push-ups, waist-to-height ratio, reaction time, and
 the floor Sitting-Rising Test.
+
+Created and maintained by **Filipa Santos Rodrigues**.
 
 ## Why KDM (and not a single ML model)
 
@@ -107,7 +107,7 @@ Three ingestion paths, all producing the same `(k, q, s)` schema:
   *uncorrected* estimate (`BA_E`) is unstable with few markers and can return
   extreme or negative ages. See below.
 
-## Corrected estimate (recommended)
+## Corrected estimate 
 
 The uncorrected Klemera-Doubal estimate has no anchor, so with few/weak markers
 it swings wildly. The **corrected** estimate (`BA_EC`) adds a chronological-age
@@ -192,6 +192,16 @@ Rscript data-raw/build_coefficients.R   # NHANES step needs internet + the nhane
 Rscript -e 'for (f in list.files("R", full.names=TRUE)) source(f); testthat::test_dir("tests/testthat")'
 ```
 
+## Author & citation
+
+Created by **Filipa Santos Rodrigues**. The methodology (assembling the
+coefficient table from public sources and adapting the Klemera-Doubal framework
+to functional fitness markers) is original work by the author.
+
+If you use FitAge, please cite it — see [`CITATION.cff`](CITATION.cff), or:
+
+> Santos Rodrigues, F. (2026). *FitAge: Functional (Fitness) Age Calculator* (v0.1.0). https://github.com/USERNAME/FitAge
+
 ## License
 
-MIT.
+MIT © 2026 Filipa Santos Rodrigues. See [`LICENSE`](LICENSE).

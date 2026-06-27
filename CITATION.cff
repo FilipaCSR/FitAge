@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use FitAge, please cite it as below."
+title: "FitAge: Functional (Fitness) Age Calculator"
+abstract: >-
+  An open-source R implementation that estimates functional ("fitness") age
+  from physical performance markers (grip strength, push-ups, chair rise,
+  floor sit-and-rise, one-leg balance, sit-and-reach, waist-to-height ratio,
+  reaction time), adapting the Klemera-Doubal Method framework to functional
+  fitness markers.
+type: software
+authors:
+  - given-names: Filipa
+    family-names: Santos Rodrigues
+    email: filipacsrodrigues@gmail.com
+license: MIT
+version: 0.1.0
+date-released: "2026-06-27"
+# After pushing to GitHub, set this to your repository URL:
+repository-code: "https://github.com/USERNAME/FitAge"
+keywords:
+  - functional age
+  - fitness age
+  - Klemera-Doubal
+  - physical performance
+  - R
