@@ -142,34 +142,33 @@ more/stronger markers it automatically matters less. Example effect:
 for (f in list.files("R", full.names = TRUE)) source(f)
 load("data/fitage_coefficients.rda")   # built by data-raw/build_coefficients.R
 
-# a 55-year-old woman: pick the female calibration rows
+# a 35-year-old woman: pick the female calibration rows
 female <- fitage_coefficients[fitage_coefficients$sex == 2, ]
 
-vals <- c(grip = 28,            # best single-hand grip, kg
-          whtr = 0.52,          # waist / height
-          pushups_mod = 8,      # modified push-ups in 40 s
-          balance_oneleg = 45,  # one-leg stand score (OLSsum)
-          sit_reach = 20,       # sit-and-reach, cm
-          chair_rise = 12.5,    # 5x sit-to-stand, seconds
-          sit_rise_floor = 7,   # floor sit-and-rise, 0-10
-          reaction = 540)       # reaction time, ms
+# at age 35, chair rise (45-85), floor sit-rise (48-85) and reaction time
+# (40-70) aren't calibrated, so supply the markers that apply at this age:
+vals <- c(grip = 26,            # best single-hand grip, kg
+          pushups_mod = 20,     # modified push-ups in 40 s
+          balance_oneleg = 60,  # one-leg stand score (OLSsum)
+          sit_reach = 10,       # sit-and-reach, cm
+          whtr = 0.41)          # waist / height
 
 # corrected estimate (recommended)
-res <- functional_age(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
+res <- functional_age(vals, female, chrono_age = 35, s_ba2 = prior_s_ba2(10))
 
-res$functional_age      #> 54.8   (estimated functional age)
-res$ci95                #> low 40.1, high 69.4   (95% band; SE = res$se = 7.5)
-res$marker_information  #> 0.44   (44% of the estimate is from markers, 56% the age prior)
-res$stability           #> "moderate"  (8 markers, 2 provisional)
+res$functional_age      #> 30.5   (estimated functional age)
+res$ci95                #> low 13.7, high 47.2   (95% band; SE = res$se = 8.6)
+res$marker_information  #> 0.27   (27% of the estimate is from markers, 73% the age prior)
+res$stability           #> "moderate"  (5 markers, 0 provisional)
 
-# how much does each marker move the score? (provisional ones flagged)
-leave_one_out(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
+# how much does each marker move the score?
+leave_one_out(vals, female, chrono_age = 35, s_ba2 = prior_s_ba2(10))
 #>           marker provisional fa_without  delta
-#> 1           whtr       FALSE       55.5  +0.72
-#> 2    pushups_mod       FALSE       55.3  +0.55
-#> 3 balance_oneleg       FALSE       54.3  -0.47
-#> 4 sit_rise_floor        TRUE       54.3  -0.46   <- provisional, small influence
-#> ...
+#> 1    pushups_mod       FALSE       36.6  +6.16
+#> 2           grip       FALSE       28.3  -2.12
+#> 3           whtr       FALSE       32.2  +1.71
+#> 4 balance_oneleg       FALSE       28.8  -1.62
+#> 5      sit_reach       FALSE       29.8  -0.67
 ```
 
 You supply only the markers you have — KDM degrades gracefully with fewer.
