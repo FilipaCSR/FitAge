@@ -199,7 +199,7 @@ to functional fitness markers) is original work by the author.
 
 If you use FitAge, please cite it — see [`CITATION.cff`](CITATION.cff), or:
 
-> Santos Rodrigues, F. (2026). *FitAge: Functional (Fitness) Age Calculator* (v0.1.0). https://github.com/USERNAME/FitAge
+> Santos Rodrigues, F. (2026). *FitAge: Functional (Fitness) Age Calculator* (v0.1.0). https://github.com/filipacsr/FitAge
 
 ## License
 

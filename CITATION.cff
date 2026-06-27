@@ -15,11 +15,10 @@ authors:
 license: MIT
 version: 0.1.0
 date-released: "2026-06-27"
-# After pushing to GitHub, set this to your repository URL:
-repository-code: "https://github.com/USERNAME/FitAge"
+repository-code: "https://github.com/filipacsr/FitAge"
 keywords:
   - functional age
   - fitness age
   - Klemera-Doubal
   - physical performance
-  - R
+  - biological age
