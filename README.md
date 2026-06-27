@@ -129,7 +129,7 @@ more/stronger markers it automatically matters less. Example effect:
 
 | Case | raw `BA_E` | corrected `BA_EC` |
 |---|---|---|
-| 55 yo woman, all 7 markers | 53.1 | 54.3 |
+| 55 yo woman, all 8 markers | 54.5 | 54.8 |
 | 40 yo man, 3 markers | 17.6 | 35.4 |
 | 40 yo man, 3 markers, very fit | −18.6 | 27.9 |
 
