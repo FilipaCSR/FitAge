@@ -41,6 +41,30 @@ test_that("stronger grip lowers functional age", {
   )
 })
 
+test_that("corrected estimate regularizes weak markers toward chronological age", {
+  d <- make_synthetic()
+  coefs <- fit_kdm_coefficients(d, c("grip", "whtr"), source = "synthetic")
+  male <- coefs[coefs$sex == 1, ]
+
+  # an extreme single-marker value that makes raw BA_E wild
+  extreme <- c(grip = male$q[male$bm == "grip"] + male$k[male$bm == "grip"] * 50 + 40)
+
+  raw  <- functional_age(extreme, male, chrono_age = 50)$functional_age
+  corr <- functional_age(extreme, male, chrono_age = 50,
+                         s_ba2 = prior_s_ba2(10))$functional_age
+
+  # correction pulls the estimate back toward chronological age (50)
+  expect_lt(abs(corr - 50), abs(raw - 50))
+  # an unusually strong value still reads younger than 50, just not absurdly so
+  expect_lt(corr, 50)
+  expect_gt(corr, 0)
+})
+
+test_that("prior_s_ba2 returns variance and validates input", {
+  expect_equal(prior_s_ba2(10), 100)
+  expect_error(prior_s_ba2(-1), "prior_sd_years > 0")
+})
+
 test_that("validate_coefficients rejects bad tables", {
   expect_error(validate_coefficients(data.frame(bm = "x")), "missing required")
   bad <- data.frame(bm = "x", sex = 1, k = 1, q = 0, s = -1)

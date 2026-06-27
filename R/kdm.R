@@ -102,3 +102,28 @@ functional_age <- function(values, coefs, chrono_age = NULL, s_ba2 = NULL,
     corrected = corrected
   )
 }
+
+#' Prior variance for the chronological-age correction (`s_ba2`)
+#'
+#' The corrected Klemera-Doubal estimate (`BA_EC`) is a precision-weighted
+#' average of the marker-based estimate and a chronological-age prior;
+#' `s_ba2` is the variance of that prior. Smaller `s_ba2` pulls the estimate
+#' more strongly toward chronological age, so few or weak markers degrade to
+#' "≈ your real age" instead of producing extreme (even negative) values.
+#'
+#' This is a deliberate modelling choice: a true KDM `s_ba2` is estimated from a
+#' cohort with *all* markers measured per person, which public data does not
+#' provide for these fitness measures. The default prior SD of 10 years means
+#' functional age is expected to fall within roughly ±20 years of chronological
+#' age. Because these fitness markers are individually weak age predictors
+#' (high noise-to-slope), this prior carries meaningful weight; with more or
+#' stronger markers it automatically matters less. Tune `prior_sd_years` to taste.
+#'
+#' @param prior_sd_years Expected SD (years) of functional age around CA.
+#' @return The prior variance `s_ba2` (a scalar), i.e. `prior_sd_years^2`.
+#' @export
+prior_s_ba2 <- function(prior_sd_years = 10) {
+  stopifnot(is.numeric(prior_sd_years), length(prior_sd_years) == 1,
+            prior_sd_years > 0)
+  prior_sd_years^2
+}

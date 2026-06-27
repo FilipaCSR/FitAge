@@ -91,6 +91,35 @@ Three ingestion paths, all producing the same `(k, q, s)` schema:
 - **Conditional independence.** The simple KDM ignores cross-marker
   correlations (it uses the diagonal form, as `BioAge` does). A joint cohort
   would let you model the full covariance.
+- **Weak markers need the chronological-age correction.** These fitness markers
+  are individually weak age predictors (noise-to-slope of 24–109 years), so the
+  *uncorrected* estimate (`BA_E`) is unstable with few markers and can return
+  extreme or negative ages. See below.
+
+## Corrected estimate (recommended)
+
+The uncorrected Klemera-Doubal estimate has no anchor, so with few/weak markers
+it swings wildly. The **corrected** estimate (`BA_EC`) adds a chronological-age
+prior — a precision-weighted average of the marker estimate and your real age:
+
+```r
+functional_age(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
+```
+
+`s_ba2` is the prior variance (how far functional age can sit from chronological
+age). `prior_s_ba2(prior_sd_years = 10)` is the default — smaller `prior_sd`
+pulls harder toward real age. A true KDM `s_ba2` needs a cohort with all markers
+per person, which public data lacks for these measures, so this is a documented
+modelling choice. With weak markers the prior carries real weight; with more/
+stronger markers it automatically matters less. Example effect:
+
+| Case | raw `BA_E` | corrected `BA_EC` |
+|---|---|---|
+| 55 yo woman, all 7 markers | 53.1 | 54.3 |
+| 40 yo man, 3 markers | 17.6 | 35.4 |
+| 40 yo man, 3 markers, very fit | −18.6 | 27.9 |
+
+`try_fitage.R` uses the corrected estimate by default.
 
 ## Usage
 
