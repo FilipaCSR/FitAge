@@ -7,8 +7,14 @@ measures, and where every number comes from.
 
 ## 1. The method: Klemera–Doubal (KDM)
 
-FitAge uses the **Klemera–Doubal Method**, the same biological-age algorithm used
-for blood biomarkers (e.g. the `BioAge` package), applied to fitness markers.
+FitAge **adapts the Klemera–Doubal framework to functional fitness markers.** KDM
+was developed and validated for biological-age estimation from clinical/blood
+biomarkers (e.g. the `BioAge` package); FitAge borrows the same mathematical
+machinery but applies it to physical-performance measures. This is an
+exploratory, educational use — fitness markers are individually *weaker* age
+predictors than blood biomarkers, and FitAge has **not** been validated against
+health outcomes the way blood-based clocks have. It is not equivalent to a
+validated biological-age clock.
 
 **Why KDM and not machine learning?** A supervised model `age ~ f(grip, balance,
 …)` needs every marker measured on the *same individuals*. No open dataset has
@@ -52,10 +58,17 @@ BA_EC =   ───────────────────────�
                  Σ_j (k_j/s_j)² + 1 / s_ba2
 ```
 
-`s_ba2` is the prior variance (`prior_s_ba2()`, default prior SD 10 years). A
-true KDM `s_ba2` needs a cohort with all markers per person, which public data
-lacks here, so this is a documented modelling choice. Few/weak markers degrade
-gracefully toward "≈ your real age" instead of producing nonsense.
+**`s_ba2` here is a regularization choice, not a canonical KDM parameter
+estimated from the assembled marker set.** In standard KDM, `s_ba2` is *estimated*
+from a reference cohort with every marker measured per person. FitAge has no such
+cohort. We did test estimating it from the one joint subset available — NHANES
+grip + waist-to-height — and the KD estimator returns a **negative** variance
+(men −96, women −141): those two markers are so weak that the estimation noise
+(~31–33 yr SD) swamps the age signal, so the estimate is degenerate, not usable
+(`data-raw/estimate_s_ba2.R`). So `s_ba2` is set deliberately as a prior
+(`prior_s_ba2()`, default prior SD 10 yr) that regularizes the estimate toward
+chronological age — not a quantity recovered from data. Smaller values pull
+harder toward chronological age; tune to taste.
 
 ---
 

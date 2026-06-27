@@ -1,9 +1,14 @@
 # FitAge — Functional (Fitness) Age Calculator
 
 An open-source R implementation that estimates a person's **functional age**
-from physical performance measures, using the **Klemera-Doubal Method (KDM)** —
-the same approach used for blood-biomarker biological age (e.g.
-[`BioAge`](https://github.com/dayoonkwon/BioAge)), applied here to fitness markers.
+from physical performance measures. FitAge **adapts the Klemera-Doubal Method
+(KDM) framework to functional fitness markers** — the same machinery used for
+blood-biomarker biological-age clocks (e.g.
+[`BioAge`](https://github.com/dayoonkwon/BioAge)), but applied to physical
+performance. It is an **exploratory, educational** tool: fitness markers are
+individually weaker age predictors than blood biomarkers, and FitAge has **not**
+been validated against health outcomes — it is **not** equivalent to a validated
+biological-age clock.
 
 Markers: grip strength, sit-to-stand / sit-and-rise, one-leg balance,
 sit-and-reach flexibility, push-ups, waist-to-height ratio, reaction time, and
@@ -112,12 +117,15 @@ prior — a precision-weighted average of the marker estimate and your real age:
 functional_age(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
 ```
 
-`s_ba2` is the prior variance (how far functional age can sit from chronological
-age). `prior_s_ba2(prior_sd_years = 10)` is the default — smaller `prior_sd`
-pulls harder toward real age. A true KDM `s_ba2` needs a cohort with all markers
-per person, which public data lacks for these measures, so this is a documented
-modelling choice. With weak markers the prior carries real weight; with more/
-stronger markers it automatically matters less. Example effect:
+`s_ba2` here is a **regularization choice, not a canonical KDM parameter
+estimated from the marker set.** Standard KDM *estimates* `s_ba2` from a cohort
+with every marker measured per person; we have none, and the one joint subset
+available (NHANES grip + waist-to-height) makes the KD estimator degenerate — it
+returns a negative variance because those markers are too weak (see
+`data-raw/estimate_s_ba2.R`). So `s_ba2` is set as a deliberate prior:
+`prior_s_ba2(prior_sd_years = 10)` is the default, and smaller `prior_sd` pulls
+harder toward real age. With weak markers the prior carries real weight; with
+more/stronger markers it automatically matters less. Example effect:
 
 | Case | raw `BA_E` | corrected `BA_EC` |
 |---|---|---|
