@@ -48,6 +48,8 @@ read_grouped <- function(path, source) {
 }
 norway <- read_grouped("data-raw/sources/norwegian_aandstad2016.csv",
                        "Aandstad 2016 (Norway), n=726, ages 20-65")
+sitrise <- read_grouped("data-raw/sources/sitrise_araujo2020.csv",
+                        "Araujo 2020 SRT (provisional, median-based, 46+)")
 # Chair rise: published percentile table -> moments -> grouped fit.
 chairrise_raw <- read.csv("data-raw/sources/chairrise_clsa_mayhew2023.csv", comment.char = "#")
 chairrise_mom <- percentiles_to_moments(
@@ -73,7 +75,7 @@ nhanes <- tryCatch(build_nhanes(), error = function(e) {
           "). grip & whtr will be MISSING from the table.")
   NULL
 })
-parts <- list(norway[shared], chairrise[shared], reaction[shared])
+parts <- list(norway[shared], sitrise[shared], chairrise[shared], reaction[shared])
 if (!is.null(nhanes)) parts <- c(list(nhanes[shared]), parts)
 
 fitage_coefficients <- do.call(combine_coefficients, parts)

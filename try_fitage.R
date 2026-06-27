@@ -20,6 +20,7 @@ load("data/fitage_coefficients.rda")
 #   balance_oneleg one-leg standing score (OLSsum), seconds
 #   sit_reach      sit-and-reach distance, cm
 #   chair_rise     time for 5 sit-to-stands, seconds
+#   sit_rise_floor floor Sitting-Rising Test composite score 0-10 (46+ only)
 #   reaction       reaction time, ms
 
 #' Compute and pretty-print functional age for one person.
@@ -74,7 +75,7 @@ fitage <- function(age, sex, ..., prior_sd = 10) {
 # A 55-year-old woman, full marker set
 fitage(age = 55, sex = "female",
        grip = 28, whtr = 0.52, pushups_mod = 8, balance_oneleg = 45,
-       sit_reach = 20, chair_rise = 12.5, reaction = 540)
+       sit_reach = 20, chair_rise = 12.5, sit_rise_floor = 7, reaction = 540)
 
 # A 40-year-old man, only a few markers measured
 fitage(age = 40, sex = "male",

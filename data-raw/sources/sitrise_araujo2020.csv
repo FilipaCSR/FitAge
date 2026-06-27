@@ -1,0 +1,28 @@
+# Floor Sitting-Rising Test (SRT), COMPOSITE score (0-10, half-point steps).
+# Araujo et al. 2020, Eur J Prev Cardiol 27(8):888 (DOI 10.1177/2047487319847004),
+# Supplemental material. CLINIMEX clinic, Rio de Janeiro (n=6141: 4101 M, 2040 F).
+# Higher score = better = younger (k < 0).
+#
+# PROVISIONAL: `mean` = MEDIAN (P50) read from the supplement composite tables;
+# the score is discrete and ceiling-censored below ~45 (median = 10), so this
+# marker is restricted to 46+ where the test discriminates. `sd` is a fixed
+# IQR-derived pooled estimate (~2.8; spread grows with age, P25-P75 read from supplement) pending exact P25/P75 from the source
+# spreadsheet. n per band is the real published count. sex: 1=male, 2=female.
+# Brazilian clinical sample - adds to the stitched-population caveat.
+bm,sex,age_mid,mean,sd,n
+sit_rise_floor,1,48,8.0,2.8,408
+sit_rise_floor,1,53,7.5,2.8,443
+sit_rise_floor,1,58,7.0,2.8,468
+sit_rise_floor,1,63,6.5,2.8,423
+sit_rise_floor,1,68,6.0,2.8,342
+sit_rise_floor,1,73,5.0,2.8,265
+sit_rise_floor,1,78,4.5,2.8,195
+sit_rise_floor,1,83,4.0,2.8,97
+sit_rise_floor,2,48,8.5,2.8,230
+sit_rise_floor,2,53,7.5,2.8,237
+sit_rise_floor,2,58,7.0,2.8,206
+sit_rise_floor,2,63,6.0,2.8,178
+sit_rise_floor,2,68,5.5,2.8,150
+sit_rise_floor,2,73,5.0,2.8,113
+sit_rise_floor,2,78,4.0,2.8,119
+sit_rise_floor,2,83,3.5,2.8,47
