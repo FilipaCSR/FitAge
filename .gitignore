@@ -1,0 +1,17 @@
+# R session / history
+.RData
+.Rhistory
+.Rapp.history
+.Rproj.user/
+*.Rproj
+
+# OS / editor cruft
+.DS_Store
+*~
+
+# Python virtualenv (not part of this R package)
+.venv/
+
+# Build artifacts
+*.tar.gz
+..Rcheck/

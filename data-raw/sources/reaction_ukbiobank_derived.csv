@@ -1,0 +1,11 @@
+# Reaction time (complex visual recognition RT, ms). Derived from UK Biobank
+# analysis in PMC8249619 (ages 40-70). Slope k = 3.40 ms/yr (women); men ~0.55
+# ms/yr less steep -> 2.85. Intercept q solved from cohort means at mean age
+# 55.81 (women 534.98 ms, men 520.66 ms). Higher RT = older (k > 0).
+# WARNING: residual SD `s` is NOT reported by the source; ~112 ms is an
+# approximate population value and MUST be refined from the UKB showcase.
+# This is a direct-coefficient source (already in k/q/s form), not a grouped table.
+# sex: 1=male, 2=female.
+bm,sex,k,q,s,age_min,age_max,source,notes
+reaction,1,2.85,361.60,112,40,70,"UK Biobank (PMC8249619), derived","s APPROXIMATE - refine"
+reaction,2,3.40,345.23,112,40,70,"UK Biobank (PMC8249619), derived","s APPROXIMATE - refine"

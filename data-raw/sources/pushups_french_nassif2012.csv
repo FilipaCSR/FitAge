@@ -1,0 +1,9 @@
+# Push-ups, adults. Nassif et al. 2012, BMJ Open 2;5:e001022 (French population,
+# IRMES/INSEP). Adult bands only (study also covers youth 8-17, excluded here).
+# Max push-ups to exhaustion. NOTE: only two adult age bands -> slope is coarse;
+# women's mean rises 18-39 -> 40-60 (n=413, likely selection), so female k is ~flat/positive.
+bm,sex,age_mid,mean,sd,n
+pushups,1,28.5,46.78,20.55,2172
+pushups,1,50.0,40.39,19.97,557
+pushups,2,28.5,25.97,14.81,2001
+pushups,2,50.0,27.50,16.20,413

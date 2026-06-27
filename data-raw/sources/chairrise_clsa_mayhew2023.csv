@@ -1,0 +1,25 @@
+# Five-repetition chair rise (seconds to complete 5 stands). Mayhew et al. 2023,
+# Age and Ageing 52(4):afad054, Supplementary Appendix 5, Tables 7 (M) & 8 (F).
+# CLSA, Canada. EXACT published percentiles (every 5 yr, 45-85). Higher = older
+# (k > 0). Chair 47 cm; arms across chest; timed to 0.1 s; non-completers excluded.
+# Ingested via percentiles_to_moments() -> fit_from_grouped(). sex: 1=male, 2=female.
+# n per age-point not published; equal weights used (~total chair-rise n 12,880 M / 12,184 F).
+bm,sex,age_mid,n,p5,p10,p20,p25,p50,p75,p80,p90,p95
+chair_rise,1,45,1430,7.3,8.2,9.3,9.7,11.5,13.8,14.2,15.8,17.5
+chair_rise,1,50,1430,7.6,8.4,9.6,10.0,11.8,14.1,14.6,16.2,17.8
+chair_rise,1,55,1430,7.8,8.7,9.9,10.3,12.2,14.3,14.9,16.6,18.0
+chair_rise,1,60,1430,8.0,9.0,10.2,10.6,12.5,14.6,15.3,17.0,18.2
+chair_rise,1,65,1430,8.3,9.3,10.4,10.9,12.9,15.1,15.7,17.5,18.9
+chair_rise,1,70,1430,8.5,9.5,10.7,11.2,13.2,15.5,16.2,18.0,19.5
+chair_rise,1,75,1430,8.8,9.8,11.0,11.5,13.6,16.0,16.6,18.5,20.2
+chair_rise,1,80,1430,9.0,10.1,11.3,11.8,14.0,16.4,17.1,19.0,20.8
+chair_rise,1,85,1430,9.3,10.4,11.6,12.1,14.4,16.9,17.5,19.5,21.5
+chair_rise,2,45,1350,7.2,8.1,9.2,9.6,11.4,13.5,14.0,15.5,17.3
+chair_rise,2,50,1350,7.5,8.5,9.6,10.0,11.8,14.0,14.5,16.0,17.7
+chair_rise,2,55,1350,7.9,8.8,9.9,10.4,12.2,14.4,15.0,16.6,18.1
+chair_rise,2,60,1350,8.3,9.2,10.3,10.8,12.7,14.9,15.5,17.2,18.6
+chair_rise,2,65,1350,8.6,9.5,10.7,11.2,13.1,15.4,16.1,17.9,19.5
+chair_rise,2,70,1350,9.0,9.9,11.1,11.6,13.6,16.0,16.7,18.6,20.4
+chair_rise,2,75,1350,9.3,10.2,11.5,12.0,14.0,16.5,17.3,19.3,21.4
+chair_rise,2,80,1350,9.7,10.6,11.9,12.4,14.5,17.1,17.9,20.1,22.3
+chair_rise,2,85,1350,10.0,11.0,12.3,12.8,14.9,17.6,18.5,20.8,23.3

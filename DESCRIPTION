@@ -1,0 +1,28 @@
+Package: FitAge
+Title: Functional (Fitness) Age Calculator
+Version: 0.1.0
+Authors@R:
+    person("Filipa", "Santos Rodrigues", role = c("aut", "cre"),
+           email = "filipacsrodrigues@gmail.com")
+Description: Estimates a person's functional ("fitness") age from physical
+    performance measures - grip strength, sit-to-stand / sit-and-rise,
+    one-leg balance, sit-and-reach flexibility, push-ups, waist-to-height
+    ratio and reaction time - using the Klemera-Doubal Method (KDM). Each
+    measure is calibrated against chronological age independently, so markers
+    sourced from different normative datasets (NHANES, plus published norms)
+    can be combined in a single model without requiring all measures on the
+    same individuals.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.0.0)
+Imports:
+    stats
+Suggests:
+    nhanesA,
+    dplyr,
+    testthat (>= 3.0.0)
+LazyData: true
+Config/testthat/edition: 3
