@@ -51,15 +51,25 @@ fitage <- function(age, sex, ..., prior_sd = 10) {
   cat(sprintf("  Functional age : %.1f years   (%+.1f vs actual, %s)\n",
               res$functional_age, res$functional_age_advance,
               ifelse(res$functional_age_advance >= 0, "older", "younger")))
+  cat(sprintf("  95%% band       : %.1f - %.1f   (SE %.1f yr)\n",
+              res$ci95["low"], res$ci95["high"], res$se))
+  cat(sprintf("  Stability      : %s   (%d markers, %d provisional, %.0f%% from markers vs age prior)\n",
+              toupper(res$stability), length(res$markers_used),
+              res$n_provisional, 100 * res$marker_information))
   cat(sprintf("  [raw marker-only estimate, no CA anchor: %.1f]\n", raw))
 
   cat("\n  Per-marker contribution (years; high = pushes age up):\n")
   contrib <- sort(res$contributions, decreasing = TRUE)
   for (m in names(contrib)) cat(sprintf("    %-15s %+7.2f\n", m, contrib[m]))
-  # the chronological-age anchor absorbs the rest of the corrected estimate
   anchor <- res$functional_age - sum(res$contributions)
   cat(sprintf("    %-15s %+7.2f  (regularization toward actual age)\n",
               "age-anchor", anchor))
+
+  cat("\n  Leave-one-out (score if each marker were removed; * = provisional):\n")
+  loo <- leave_one_out(vals, coefs, chrono_age = age, s_ba2 = s_ba2)
+  for (i in seq_len(nrow(loo)))
+    cat(sprintf("    %-15s %+6.2f yr%s\n", loo$marker[i], loo$delta[i],
+                ifelse(isTRUE(loo$provisional[i]), "  *", "")))
 
   if (length(res$markers_dropped))
     cat("\n  Dropped (age outside calibration):",

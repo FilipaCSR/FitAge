@@ -81,26 +81,89 @@ functional_age <- function(values, coefs, chrono_age = NULL, s_ba2 = NULL,
 
   num_terms <- (x - q) * (k / s^2)   # per-marker numerator contribution
   num <- sum(num_terms)
-  den <- sum((k / s)^2)
+  marker_prec <- sum((k / s)^2)      # precision contributed by the markers
+  den <- marker_prec
 
   corrected <- !is.null(chrono_age) && !is.null(s_ba2)
+  prior_prec <- if (corrected) 1 / s_ba2 else 0
   if (corrected) {
     num <- num + chrono_age / s_ba2
-    den <- den + 1 / s_ba2
+    den <- den + prior_prec
   }
 
   ba <- num / den
   contributions <- num_terms / den   # each marker's share of the estimate, in years
   names(contributions) <- bm
 
+  # Confidence band: total precision `den` -> SE = 1/sqrt(den) (years).
+  se <- 1 / sqrt(den)
+  ci95 <- c(low = unname(ba - 1.96 * se), high = unname(ba + 1.96 * se))
+
+  # How much of the estimate is driven by markers vs the chronological-age prior.
+  marker_information <- marker_prec / den
+
+  # Provisional markers (optional `provisional` column in coefs).
+  n_provisional <- if ("provisional" %in% names(coefs))
+    sum(as.logical(coefs$provisional[idx]), na.rm = TRUE) else 0L
+
+  stability <- .stability_flag(length(bm), n_provisional, marker_information)
+
   list(
     functional_age = unname(ba),
     functional_age_advance = if (is.null(chrono_age)) NA_real_ else unname(ba - chrono_age),
+    se = unname(se),
+    ci95 = ci95,
+    marker_information = unname(marker_information),
+    stability = stability,
     contributions = contributions,
     markers_used = bm,
     markers_dropped = dropped,
+    n_provisional = n_provisional,
     corrected = corrected
   )
+}
+
+# Coarse stability flag from marker count, provisional usage, and the share of
+# the estimate driven by markers (vs the chronological-age prior).
+.stability_flag <- function(n_markers, n_provisional, marker_information) {
+  if (n_markers < 3 || marker_information < 0.25) return("low")
+  if (n_provisional > 0 || marker_information < 0.45) return("moderate")
+  "high"
+}
+
+#' Leave-one-out marker sensitivity
+#'
+#' Recomputes functional age with each marker removed in turn, to show how much
+#' each marker moves the score. Large `delta` means the estimate leans heavily on
+#' that marker - worth scrutinising for the provisional ones (floor SRT, reaction
+#' time). Same arguments as [functional_age()].
+#'
+#' @inheritParams functional_age
+#' @return A data frame (sorted by absolute influence) with columns: `marker`,
+#'   `provisional`, `fa_without` (functional age with that marker removed),
+#'   `delta` (`fa_without` minus the full-model functional age).
+#' @export
+leave_one_out <- function(values, coefs, chrono_age = NULL, s_ba2 = NULL,
+                          enforce_age_band = TRUE) {
+  full <- functional_age(values, coefs, chrono_age, s_ba2, enforce_age_band)
+  used <- full$markers_used
+  prov_col <- "provisional" %in% names(coefs)
+
+  rows <- lapply(used, function(m) {
+    red <- functional_age(values[setdiff(names(values), m)], coefs,
+                          chrono_age, s_ba2, enforce_age_band)
+    data.frame(
+      marker      = m,
+      provisional = if (prov_col) isTRUE(as.logical(coefs$provisional[match(m, coefs$bm)])) else NA,
+      fa_without  = red$functional_age,
+      delta       = red$functional_age - full$functional_age,
+      stringsAsFactors = FALSE
+    )
+  })
+  out <- do.call(rbind, rows)
+  out <- out[order(-abs(out$delta)), ]
+  rownames(out) <- NULL
+  out
 }
 
 #' Prior variance for the chronological-age correction (`s_ba2`)

@@ -60,6 +60,37 @@ test_that("corrected estimate regularizes weak markers toward chronological age"
   expect_gt(corr, 0)
 })
 
+test_that("confidence band and stability reflect marker precision", {
+  d <- make_synthetic()
+  coefs <- fit_kdm_coefficients(d, c("grip", "whtr"), source = "synthetic")
+  male <- coefs[coefs$sex == 1, ]
+  vals <- setNames(male$q + male$k * 50, male$bm)
+
+  res <- functional_age(vals, male, chrono_age = 50, s_ba2 = prior_s_ba2(10))
+  expect_true(res$se > 0)
+  expect_lt(res$ci95["low"], res$functional_age)
+  expect_gt(res$ci95["high"], res$functional_age)
+  expect_true(res$marker_information >= 0 && res$marker_information <= 1)
+  # adding the prior tightens the band vs the uncorrected estimate
+  raw <- functional_age(vals, male, chrono_age = 50)
+  expect_lt(res$se, raw$se)
+  # 2 markers -> "low" stability
+  expect_equal(res$stability, "low")
+})
+
+test_that("leave_one_out ranks marker influence", {
+  d <- make_synthetic()
+  coefs <- fit_kdm_coefficients(d, c("grip", "whtr"), source = "synthetic")
+  male <- coefs[coefs$sex == 1, ]
+  vals <- c(grip = male$q[male$bm == "grip"] + male$k[male$bm == "grip"] * 50 + 8,
+            whtr = male$q[male$bm == "whtr"] + male$k[male$bm == "whtr"] * 50)
+
+  loo <- leave_one_out(vals, male, chrono_age = 50, s_ba2 = prior_s_ba2(10))
+  expect_setequal(loo$marker, c("grip", "whtr"))
+  # sorted by absolute influence; grip is the off-norm one so it moves more
+  expect_gte(abs(loo$delta[1]), abs(loo$delta[2]))
+})
+
 test_that("prior_s_ba2 returns variance and validates input", {
   expect_equal(prior_s_ba2(10), 100)
   expect_error(prior_s_ba2(-1), "prior_sd_years > 0")

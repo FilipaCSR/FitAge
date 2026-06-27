@@ -75,8 +75,19 @@ nhanes <- tryCatch(build_nhanes(), error = function(e) {
           "). grip & whtr will be MISSING from the table.")
   NULL
 })
-parts <- list(norway[shared], sitrise[shared], chairrise[shared], reaction[shared])
-if (!is.null(nhanes)) parts <- c(list(nhanes[shared]), parts)
+# Flag provisional markers (approximate coefficients): floor SRT (median-based,
+# Brazilian clinical sample) and reaction time (residual SD ~112 ms is a guess).
+norway$provisional    <- FALSE
+chairrise$provisional <- FALSE
+sitrise$provisional   <- TRUE
+reaction$provisional  <- TRUE
+sharedp <- c(shared, "provisional")
+
+parts <- list(norway[sharedp], sitrise[sharedp], chairrise[sharedp], reaction[sharedp])
+if (!is.null(nhanes)) {
+  nhanes$provisional <- FALSE
+  parts <- c(list(nhanes[sharedp]), parts)
+}
 
 fitage_coefficients <- do.call(combine_coefficients, parts)
 

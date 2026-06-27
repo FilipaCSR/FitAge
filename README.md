@@ -151,23 +151,34 @@ vals <- c(grip = 28,            # best single-hand grip, kg
           balance_oneleg = 45,  # one-leg stand score (OLSsum)
           sit_reach = 20,       # sit-and-reach, cm
           chair_rise = 12.5,    # 5x sit-to-stand, seconds
+          sit_rise_floor = 7,   # floor sit-and-rise, 0-10
           reaction = 540)       # reaction time, ms
 
-res <- functional_age(vals, female, chrono_age = 55)
+# corrected estimate (recommended)
+res <- functional_age(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
 
-res$functional_age          #> 53.1   (estimated functional age)
-res$functional_age_advance  #> -1.9   (functional minus chronological: ~2 yr "younger")
-round(sort(res$contributions, decreasing = TRUE), 2)
-#> balance_oneleg       reaction    pushups_mod     chair_rise           grip
-#>          18.77           9.92           8.20           7.87           7.70
-#>      sit_reach           whtr
-#>           0.97          -0.37
+res$functional_age      #> 54.8   (estimated functional age)
+res$ci95                #> low 40.1, high 69.4   (95% band; SE = res$se = 7.5)
+res$marker_information  #> 0.44   (44% of the estimate is from markers, 56% the age prior)
+res$stability           #> "moderate"  (8 markers, 2 provisional)
+
+# how much does each marker move the score? (provisional ones flagged)
+leave_one_out(vals, female, chrono_age = 55, s_ba2 = prior_s_ba2(10))
+#>           marker provisional fa_without  delta
+#> 1           whtr       FALSE       55.5  +0.72
+#> 2    pushups_mod       FALSE       55.3  +0.55
+#> 3 balance_oneleg       FALSE       54.3  -0.47
+#> 4 sit_rise_floor        TRUE       54.3  -0.46   <- provisional, small influence
+#> ...
 ```
 
 You supply only the markers you have — KDM degrades gracefully with fewer.
-By default, markers whose calibration does not cover the person's age are
-dropped with a warning (e.g. applying the 45–85 chair-rise calibration to a
-30-year-old); pass `enforce_age_band = FALSE` to override.
+Every score comes with a **confidence band**, a **stability** flag, and
+`marker_information` (how much of the estimate is real markers vs the age prior),
+plus `leave_one_out()` to see each marker's influence. By default, markers whose
+calibration does not cover the person's age are dropped with a warning (e.g. the
+45–85 chair-rise calibration on a 30-year-old); pass `enforce_age_band = FALSE`
+to override.
 
 ## Rebuilding the coefficient table
 

@@ -134,6 +134,26 @@ exactly as KDM should weight it.
 
 ---
 
+## 3b. Reliability & sensitivity outputs
+
+`functional_age()` returns more than a point estimate, so a score is never read
+without its context:
+
+- **Confidence band.** Total precision is `D = Σ_j (k_j/s_j)² + 1/s_ba2`; the
+  estimate's standard error is `1/√D` and the 95% band is `±1.96·SE`. More (and
+  stronger) markers raise `D` and tighten the band; provisional markers have
+  inflated `s`, so they widen it automatically.
+- **`marker_information`.** The share of the estimate driven by markers vs the
+  chronological-age prior: `Σ(k/s)² / D`. A low value means the score is mostly
+  "your age" — the markers added little. For the full 8-marker battery this is
+  ~44%, an honest reflection of how weak fitness markers are individually.
+- **`stability` flag** — `low` / `moderate` / `high`, from marker count,
+  provisional usage, and `marker_information` (thresholds in `.stability_flag`).
+- **Leave-one-out** (`leave_one_out()`) recomputes the score with each marker
+  removed in turn, reporting `delta` per marker. This exposes whether any single
+  marker — especially the **provisional** floor SRT and reaction time — is
+  driving the result. (In practice each moves the corrected score by <0.5 yr.)
+
 ## 4. Key decisions
 
 - **Sex-specific** calibration throughout (fitness norms differ strongly by sex).
