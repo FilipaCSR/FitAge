@@ -1,23 +1,28 @@
 # FitAge — Functional (Fitness) Age Calculator
 
 An open-source R implementation that estimates a person's **functional age**
-from physical performance measures. FitAge **adapts the Klemera-Doubal Method
+from physical performance measures. FitAge adapts the Klemera-Doubal Method
 (KDM) framework to functional fitness markers.
 It is an **exploratory, educational** tool: fitness markers are
 individually weaker age predictors than blood biomarkers, and FitAge has **not**
 been validated against health outcomes — it is **not** equivalent to a validated
 biological-age clock.
 
-Markers: grip strength, sit-to-stand / sit-and-rise, one-leg balance,
-sit-and-reach flexibility, push-ups, waist-to-height ratio, reaction time, and
-the floor Sitting-Rising Test.
+Markers: 
+- Grip strength
+- Sit-to-stand / sit-and-rise
+- One-leg balance
+- Sit-and-reach flexibility
+- Push-ups
+- Waist-to-height ratio
+- Reaction time
+- Floor Sitting-Rising Test
 
 Created and maintained by **Filipa Santos Rodrigues**.
 
 > **Related:** [TrueAge](https://trueage.thehumanruntime.com) is the
 > blood-biomarker sibling of FitAge — the same Klemera-Doubal backbone, but a
 > different input layer (blood chemistry instead of physical-performance tests).
-> Two clocks, different inputs, same honest method.
 
 ## Why KDM (and not a single ML model)
 
@@ -57,8 +62,8 @@ and CLSA individual data are access-controlled, so only their published norms ar
 
 | Marker | Source | Age range | Status |
 |---|---|---|---|
-| Grip strength (best single-hand) | NHANES 2011–2014 (max of 6 trials) | 18–80 | ✅ fitted (run build w/ internet) |
-| Waist-to-height ratio | NHANES 2011–2014 (`BMXWAIST`/`BMXHT`) | 18–80 | ✅ fitted (run build w/ internet) |
+| Grip strength (best single-hand) | NHANES 2011–2014 (max of 6 trials) | 18–80 | ✅ fitted |
+| Waist-to-height ratio | NHANES 2011–2014 (`BMXWAIST`/`BMXHT`) | 18–80 | ✅ fitted |
 | Push-ups (modified, 40 s) | Kjær 2016, Norway (n=726) | 20–65 | ✅ fitted |
 | Sit-and-reach flexibility | Kjær 2016, Norway | 20–65 | ✅ fitted |
 | One-leg balance | Kjær 2016, Norway | 20–65 | ✅ fitted |
@@ -188,7 +193,7 @@ to override.
 ## Rebuilding the coefficient table
 
 ```bash
-Rscript data-raw/build_coefficients.R   # NHANES step needs internet + the nhanesA package
+Rscript data-raw/build_coefficients.R   
 ```
 
 ## Tests
