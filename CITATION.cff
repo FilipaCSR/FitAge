@@ -11,11 +11,10 @@ type: software
 authors:
   - given-names: Filipa
     family-names: Santos Rodrigues
-    email: filipacsrodrigues@gmail.com
 license: MIT
 version: 0.1.0
 date-released: "2026-06-27"
-repository-code: "https://github.com/filipacsr/FitAge"
+repository-code: "https://github.com/FilipaCSR/FitAge"
 keywords:
   - functional age
   - fitness age

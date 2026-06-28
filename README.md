@@ -14,6 +14,11 @@ the floor Sitting-Rising Test.
 
 Created and maintained by **Filipa Santos Rodrigues**.
 
+> **Related:** [TrueAge](https://trueage.thehumanruntime.com) is the
+> blood-biomarker sibling of FitAge — the same Klemera-Doubal backbone, but a
+> different input layer (blood chemistry instead of physical-performance tests).
+> Two clocks, different inputs, same honest method.
+
 ## Why KDM (and not a single ML model)
 
 A supervised model `age ~ f(grip, balance, …)` needs every marker measured on
@@ -199,7 +204,7 @@ to functional fitness markers) is original work by the author.
 
 If you use FitAge, please cite it — see [`CITATION.cff`](CITATION.cff), or:
 
-> Santos Rodrigues, F. (2026). *FitAge: Functional (Fitness) Age Calculator* (v0.1.0). https://github.com/filipacsr/FitAge
+> Santos Rodrigues, F. (2026). *FitAge: Functional (Fitness) Age Calculator* (v0.1.0). https://github.com/FilipaCSR/FitAge
 
 ## License
 
