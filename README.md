@@ -62,8 +62,8 @@ and CLSA individual data are access-controlled, so only their published norms ar
 
 | Marker | Source | Age range | Status |
 |---|---|---|---|
-| Grip strength (best single-hand) | NHANES 2011–2014 (max of 6 trials) | 18–80 | ✅ fitted (run build w/ internet) |
-| Waist-to-height ratio | NHANES 2011–2014 (`BMXWAIST`/`BMXHT`) | 18–80 | ✅ fitted (run build w/ internet) |
+| Grip strength (best single-hand) | NHANES 2011–2014 (max of 6 trials) | 18–80 | ✅ fitted |
+| Waist-to-height ratio | NHANES 2011–2014 (`BMXWAIST`/`BMXHT`) | 18–80 | ✅ fitted |
 | Push-ups (modified, 40 s) | Aandstad 2016, Norway (n=726) | 20–65 | ✅ fitted |
 | Sit-and-reach flexibility | Aandstad 2016, Norway | 20–65 | ✅ fitted |
 | One-leg balance | Aandstad 2016, Norway | 20–65 | ✅ fitted |
