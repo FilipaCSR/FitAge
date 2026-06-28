@@ -59,9 +59,9 @@ and CLSA individual data are access-controlled, so only their published norms ar
 |---|---|---|---|
 | Grip strength (best single-hand) | NHANES 2011–2014 (max of 6 trials) | 18–80 | ✅ fitted (run build w/ internet) |
 | Waist-to-height ratio | NHANES 2011–2014 (`BMXWAIST`/`BMXHT`) | 18–80 | ✅ fitted (run build w/ internet) |
-| Push-ups (modified, 40 s) | Aandstad 2016, Norway (n=726) | 20–65 | ✅ fitted |
-| Sit-and-reach flexibility | Aandstad 2016, Norway | 20–65 | ✅ fitted |
-| One-leg balance | Aandstad 2016, Norway | 20–65 | ✅ fitted |
+| Push-ups (modified, 40 s) | Kjær 2016, Norway (n=726) | 20–65 | ✅ fitted |
+| Sit-and-reach flexibility | Kjær 2016, Norway | 20–65 | ✅ fitted |
+| One-leg balance | Kjær 2016, Norway | 20–65 | ✅ fitted |
 | Chair-rise / sit-to-stand | CLSA, Mayhew 2023 (Supp. App. 5) | 45–85 | ✅ fitted from exact published percentiles |
 | Floor Sitting-Rising Test (0–10) | Araújo 2020 (n=6141) | 46–85 | ⚠️ provisional — median-based, SD approximate |
 | Reaction time | UK Biobank (PMC8249619) | 40–70 | ⚠️ fitted, but residual SD is approximate |
@@ -96,8 +96,9 @@ Three ingestion paths, all producing the same `(k, q, s)` schema:
 
 ## Honest limitations
 
-- **Stitched populations.** Coefficients come from British, French, Canadian and
-  US cohorts. Slope (`k`) and noise (`s`) transfer across populations reasonably;
+- **Stitched populations.** Coefficients come from US (NHANES), Norwegian (Kjær),
+  Canadian (CLSA), Brazilian (Araújo) and British (UK Biobank) cohorts.
+  Slope (`k`) and noise (`s`) transfer across populations reasonably;
   the level/intercept (`q`) does **not**, which biases an individual's score
   because `(x − q)` is taken against a different population's baseline. Fine for
   an educational/wellness tool — **not** a validated clinical biomarker.

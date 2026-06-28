@@ -46,8 +46,8 @@ read_grouped <- function(path, source) {
   df <- read.csv(path, comment.char = "#")
   fit_from_grouped(df, source = source)
 }
-norway <- read_grouped("data-raw/sources/norwegian_aandstad2016.csv",
-                       "Aandstad 2016 (Norway), n=726, ages 20-65")
+norway <- read_grouped("data-raw/sources/norwegian_kjaer2016.csv",
+                       "Kjaer 2016 (Norway), n=726, ages 20-65")
 sitrise <- read_grouped("data-raw/sources/sitrise_araujo2020.csv",
                         "Araujo 2020 SRT (provisional, median-based, 46+)")
 # Chair rise: published percentile table -> moments -> grouped fit.

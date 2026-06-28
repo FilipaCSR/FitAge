@@ -95,9 +95,9 @@ from the raw source files in `data-raw/sources/`.
 |---|---|---|---|---|
 | Grip strength (`grip`) | best single-hand, kg | **NHANES 2011–2014** (max of 6 per-hand trials) | 18–80 | joint microdata |
 | Waist-to-height (`whtr`) | waist ÷ height | **NHANES 2011–2014** | 18–80 | joint microdata |
-| Push-ups (`pushups_mod`) | modified (knee), reps in 40 s | **Aandstad 2016, Norway** (n=726) | 20–65 | grouped means/SDs |
-| One-leg balance (`balance_oneleg`) | OLSsum score, max 120 s | **Aandstad 2016, Norway** | 20–65 | grouped means/SDs |
-| Sit-and-reach (`sit_reach`) | cm | **Aandstad 2016, Norway** | 20–65 | grouped means/SDs |
+| Push-ups (`pushups_mod`) | modified (knee), reps in 40 s | **Kjær 2016, Norway** (n=726) | 20–65 | grouped means/SDs |
+| One-leg balance (`balance_oneleg`) | OLSsum score, max 120 s | **Kjær 2016, Norway** | 20–65 | grouped means/SDs |
+| Sit-and-reach (`sit_reach`) | cm | **Kjær 2016, Norway** | 20–65 | grouped means/SDs |
 | Chair rise (`chair_rise`) | 5× sit-to-stand, seconds | **CLSA / Mayhew 2023** (Supp. App. 5, exact percentiles) | 45–85 | percentile table |
 | Floor Sitting-Rising (`sit_rise_floor`) | composite score 0–10 | **Araújo 2020** (n=6141) | 46–85 | grouped (median-based) ⚠️ provisional |
 | Reaction time (`reaction`) | ms | **UK Biobank** (PMC8249619) | 40–70 | direct k/q/s ⚠️ SD approximate |
@@ -196,14 +196,28 @@ without its context:
 
 ---
 
-## Sources
+## Sources (full citations)
 
-- **NHANES 2011–2014** Muscle Strength & Body Measures — CDC/NCHS (public).
-- Aandstad A, et al. *Normative values for musculoskeletal- and neuromotor
-  fitness in apparently healthy Norwegian adults.* BMC Sports Sci Med Rehabil
-  2016 (PMC5116214).
-- Mayhew AJ, et al. *Normative values for grip strength, gait speed, TUG, single
-  leg balance, and chair rise from the CLSA.* Age and Ageing 2023; 52(4):afad054.
-- Araújo CGS, et al. *Sitting–rising test: sex- and age-reference scores derived
-  from 6141 adults.* Eur J Prev Cardiol 2020; 27(8):888.
-- Reaction time vs age in UK Biobank — PMC8249619.
+- **Grip strength & waist-to-height — NHANES.** Centers for Disease Control and
+  Prevention (CDC), National Center for Health Statistics (NCHS). *National
+  Health and Nutrition Examination Survey, 2011–2012 and 2013–2014 cycles.*
+  Files: DEMO_G/H, BMX_G/H, MGX_G/H. https://wwwn.cdc.gov/nchs/nhanes/
+- **Push-ups, sit-and-reach, one-leg balance.** Kjær IGH, Torstveit MK, Kolle E,
+  Hansen BH, Anderssen SA. *Normative values for musculoskeletal- and neuromotor
+  fitness in apparently healthy Norwegian adults and the association with
+  obesity: a cross-sectional study.* BMC Sports Sci Med Rehabil. 2016;8:37.
+  doi:10.1186/s13102-016-0059-4 (PMC5116214).
+- **Chair rise.** Mayhew AJ, So HY, Ma J, Beauchamp MK, Griffith LE, Kuspinar A,
+  Lang JJ, Raina P. *Normative values for grip strength, gait speed, timed up and
+  go, single leg balance, and chair rise derived from the Canadian Longitudinal
+  Study on Ageing.* Age Ageing. 2023;52(4):afad054. doi:10.1093/ageing/afad054
+  (PMID 37078755).
+- **Floor Sitting-Rising Test.** Araújo CGS, Castro CLB, Franca JFC, Araújo DSMS.
+  *Sitting–rising test: sex- and age-reference scores derived from 6141 adults.*
+  Eur J Prev Cardiol. 2020;27(8):888–890. doi:10.1177/2047487319847004
+  (PMID 31039614).
+- **Reaction time.** Talboom JS, De Both MD, Naymik MA, et al. *Two separate,
+  large cohorts reveal potential modifiers of age-associated variation in visual
+  reaction time performance.* NPJ Aging Mech Dis. 2021;7:14.
+  doi:10.1038/s41514-021-00067-6 (PMC8249619). FitAge's slope is derived from the
+  UK Biobank (ages 40–70) portion.
