@@ -68,7 +68,7 @@ and CLSA individual data are access-controlled, so only their published norms ar
 | Sit-and-reach flexibility | Kjær 2016, Norway | 20–65 | ✅ fitted |
 | One-leg balance | Kjær 2016, Norway | 20–65 | ✅ fitted |
 | Chair-rise / sit-to-stand | CLSA, Mayhew 2023 (Supp. App. 5) | 45–85 | ✅ fitted from exact published percentiles |
-| Floor Sitting-Rising Test (0–10) | Araújo 2020 (n=6141) | 46–85 | ⚠️ provisional — median-based, SD approximate |
+| Floor Sitting-Rising Test (0–10) | Araújo 2020 (n=6141) | 46–85 | ⚠️ median-based, SD approximate |
 | Reaction time | UK Biobank (PMC8249619) | 40–70 | ⚠️ fitted, but residual SD is approximate |
 
 > Notes: (1) Chair rise uses the exact per-year percentiles from Supplementary
@@ -83,7 +83,7 @@ and CLSA individual data are access-controlled, so only their published norms ar
 > (`data-raw/sources/pushups_french_nassif2012.csv`) is included but off by
 > default — its female slope is unreliable. (6) Each marker is only valid within
 > its calibration age range; applying it far outside that band extrapolates.
-> (7) The floor Sitting-Rising Test is **provisional**: calibrated on the median
+> (7) The floor Sitting-Rising Test is calibrated on the median
 > composite score per age band (the score is discrete and ceiling-censored below
 > ~45, so it is restricted to 46+), with an IQR-derived pooled SD. Brazilian
 > clinical sample (Araújo 2020) — refine with exact P25/P75 from the source.
