@@ -95,8 +95,8 @@ from the raw source files in `data-raw/sources/`.
 |---|---|---|---|---|
 | Grip strength (`grip`) | best single-hand, kg | **NHANES 2011–2014** (max of 6 per-hand trials) | 18–80 | joint microdata |
 | Waist-to-height (`whtr`) | waist ÷ height | **NHANES 2011–2014** | 18–80 | joint microdata |
-| Push-ups (`pushups_mod`) | modified (knee), reps in 40 s | **Kjær 2016, Norway** (n=726) | 20–65 | grouped means/SDs |
-| One-leg balance (`balance_oneleg`) | OLSsum score, max 120 s | **Kjær 2016, Norway** | 20–65 | grouped means/SDs |
+| Push-ups (`pushups_mod`) | modified push-up (MPU), reps in 40 s | **Kjær 2016, Norway** (n=726) | 20–65 | grouped means/SDs |
+| One-leg balance (`balance_oneleg`) | OLSsum: eyes-open + eyes-closed, summed (max 120 s) | **Kjær 2016, Norway** | 20–65 | grouped means/SDs |
 | Sit-and-reach (`sit_reach`) | cm | **Kjær 2016, Norway** | 20–65 | grouped means/SDs |
 | Chair rise (`chair_rise`) | 5× sit-to-stand, seconds | **CLSA / Mayhew 2023** (Supp. App. 5, exact percentiles) | 45–85 | percentile table |
 | Floor Sitting-Rising (`sit_rise_floor`) | composite score 0–10 | **Araújo 2020** (n=6141) | 46–85 | grouped (median-based) ⚠️ provisional |
@@ -183,8 +183,17 @@ without its context:
   populations; the level/intercept (`q`) does **not**, which biases an
   individual's score. This is a wellness/educational tool — **not** a validated
   clinical biomarker.
-- **Protocol dependence.** Each input must match its source's protocol (grip
-  hand, push-up style, balance/reaction apparatus) or the calibration is invalid.
+- **Protocol dependence.** Each input must match its source's protocol or the
+  calibration is invalid. Specifics worth noting: waist is measured at the iliac
+  crest in NHANES (a navel measurement reads several cm smaller, biasing WHtR —
+  and FitAge — toward "healthier"); grip is the single-hand max, not NHANES's
+  combined-hands variable; push-ups are the modified MPU, not the on-knees MPUK;
+  reaction time is UK Biobank's *visual recognition* RT (card-matching), not a
+  simple RT.
+- **One-leg balance caveat.** `OLSsum` sums an eyes-open and an eyes-closed
+  one-leg stand (each capped 60 s). The source authors themselves question
+  whether OLSsum is a valid measure of balance (many saturate the eyes-open test
+  at 60 s and end the eyes-closed test within 15 s). Treat it as a rough marker.
 - **Conditional independence.** KDM ignores cross-marker correlation (diagonal
   form). `chair_rise` and `sit_rise_floor` overlap (both "getting up"), so that
   capacity is mildly over-weighted; we cannot quantify it without a joint cohort.

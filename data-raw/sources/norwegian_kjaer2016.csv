@@ -5,8 +5,10 @@
 # mismatch between these three markers. sex: 1=male, 2=female.
 # PROTOCOLS (the app's tests must match these):
 #   sit_reach     = cm reached, straight back, hamstring flexibility
-#   balance_oneleg= OLSsum, summed one-leg standing score, max 120 s
-#   pushups_mod   = modified (knee) push-up repetitions in 40 s
+#   balance_oneleg= OLSsum = one-leg stand eyes-OPEN + eyes-CLOSED, each cap 60 s,
+#                   summed (max 120 s). NB: authors question OLSsum's validity as balance.
+#   pushups_mod   = MPU (modified push-up), reps in 40 s. NOT the on-knees MPUK
+#                   (MPUK had usable norms for women only; men n=21, excluded).
 # n per age band not reported per cell; approximated as equal split (F~70, M~75).
 bm,sex,age_mid,mean,sd,n
 # --- sit-and-reach (cm) ---
